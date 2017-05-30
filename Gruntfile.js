@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 
 	/** VARS **/
-	
 	var globalConfig = {
 		src : 'src/main/webapp-src',
 		dest : 'src/main/webapp'
@@ -14,65 +13,11 @@ module.exports = function(grunt) {
 		
 		pkg: grunt.file.readJSON('package.json'),
 		
-		concat : {
-			js : {
-				src : [ 
-					'<%= globalConfig.src %>/scripts/*.js'
-				],
-				dest : '<%= globalConfig.dest %>/scripts/scripts.js',
-			},
-			css : {
-				src : [ '<%= globalConfig.src %>/styles/*.css', ],
-				dest : '<%= globalConfig.dest %>/styles/styles.css',
-			},
-			fonts : {
-				src : [ '<%= globalConfig.src %>/fonts/**/stylesheet.css', ],
-				dest : '<%= globalConfig.dest %>/styles/fonts.css',
-			}
-		},
-		
-		cssmin : {
-			options : {
-				shorthandCompacting : false,
-				roundingPrecision : -1
-			},
-			target : {
-				files : [{
-					expand : true,
-					cwd : '<%= globalConfig.dest %>/styles',
-					src : [ '*.css', '!*.min.css' ],
-					dest : '<%= globalConfig.dest %>/styles',
-					ext : '.min.css'
-				}]
-			}
-		},
-		
-		uglify : {
-			options : {
-				banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - */'
-			},
-			target : {
-				files : {
-					'<%= globalConfig.dest %>/scripts/scripts.min.js' : [ '<%= globalConfig.dest %>/scripts/scripts.js' ]
-				}
-			}
-		},
-		
-		// SASS task config
-		sass : {
-			dev : {
-				files : {
-					// destination // source file
-					"<%= globalConfig.src %>/styles/styles.css" : "<%= globalConfig.src %>/styles/*.scss"
-				}
-			}
-		},
-		/*
 		clean: {
 			options: { force: true },
-	    	all: ["<%= globalConfig.dest %>/**"]
+	    	all: ["<%= globalConfig.dest %>/fonts", "<%= globalConfig.dest %>/scripts", "<%= globalConfig.dest %>/styles"]
 	    },
-	    */
+	    
 		copy : {
 			plugins : {
 				files : [
@@ -128,8 +73,65 @@ module.exports = function(grunt) {
 				],
 			},
 		},
+		
+		sass : {
+			dev : {
+				files : {
+					// destination // source file
+					"<%= globalConfig.src %>/styles/styles.css" : "<%= globalConfig.src %>/styles/*.scss"
+				}
+			}
+		},
+		
+		concat : {
+			js : {
+				src : [ 
+					'<%= globalConfig.src %>/scripts/*.js'
+				],
+				dest : '<%= globalConfig.dest %>/scripts/scripts.js',
+			},
+			css : {
+				src : [ '<%= globalConfig.src %>/styles/*.css', ],
+				dest : '<%= globalConfig.dest %>/styles/styles.css',
+			},
+			fonts : {
+				src : [ '<%= globalConfig.src %>/fonts/**/stylesheet.css', ],
+				dest : '<%= globalConfig.dest %>/styles/fonts.css',
+			}
+		},
+		
+		cssmin : {
+			options : {
+				shorthandCompacting : false,
+				roundingPrecision : -1
+			},
+			target : {
+				files : [{
+					expand : true,
+					cwd : '<%= globalConfig.dest %>/styles',
+					src : [ '*.css', '!*.min.css' ],
+					dest : '<%= globalConfig.dest %>/styles',
+					ext : '.min.css'
+				}]
+			}
+		},
+		
+		uglify : {
+			options : {
+				banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - */'
+			},
+			target : {
+				files : {
+					'<%= globalConfig.dest %>/scripts/scripts.min.js' : [ '<%= globalConfig.dest %>/scripts/scripts.js' ]
+				}
+			}
+		}
+		
+		
 	});
 
+	/** tasks definition **/
+	
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -137,8 +139,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 
-	// Default task(s).
-	// 	grunt.registerTask('default', [ 'copy', 'sass', 'concat', 'cssmin', 'uglify']);
-	grunt.registerTask('default', [ 'copy', 'sass', 'concat', 'cssmin', 'uglify']);
+	grunt.registerTask('default', [ 'clean', 'copy', 'sass', 'concat', 'cssmin', 'uglify']);
 
 };

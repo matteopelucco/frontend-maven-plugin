@@ -1,0 +1,150 @@
+@font-face {
+  font-family: 'rsiworkflow';
+  src:  url('../fonts/rsiworkflow.eot?ljbxlw');
+  src:  url('../fonts/rsiworkflow.eot?ljbxlw#iefix') format('embedded-opentype'),
+    url('../fonts/rsiworkflow.ttf?ljbxlw') format('truetype'),
+    url('../fonts/rsiworkflow.woff?ljbxlw') format('woff'),
+    url('../fonts/rsiworkflow.svg?ljbxlw#rsiworkflow') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'rsiworkflow' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-liberatoria:before {
+  content: "\e91d";
+}
+.icon-arrows:before {
+  content: "\e900";
+}
+.icon-arrows-1:before {
+  content: "\e901";
+}
+.icon-arrows-2:before {
+  content: "\e902";
+}
+.icon-arrows-3:before {
+  content: "\e903";
+}
+.icon-check:before {
+  content: "\e904";
+}
+.icon-close:before {
+  content: "\e905";
+}
+.icon-danger:before {
+  content: "\e906";
+}
+.icon-delete:before {
+  content: "\e907";
+}
+.icon-editing:before {
+  content: "\e908";
+}
+.icon-interface:before {
+  content: "\e909";
+}
+.icon-internet:before {
+  content: "\e90a";
+}
+.icon-multimedia:before {
+  content: "\e90b";
+}
+.icon-multimedia-1:before {
+  content: "\e90c";
+}
+.icon-networking:before {
+  content: "\e90d";
+}
+.icon-paper:before {
+  content: "\e90e";
+}
+.icon-people:before {
+  content: "\e90f";
+}
+.icon-people-1:before {
+  content: "\e910";
+}
+.icon-people-2:before {
+  content: "\e911";
+}
+.icon-shopping:before {
+  content: "\e912";
+}
+.icon-signs:before {
+  content: "\e913";
+}
+.icon-square:before {
+  content: "\e914";
+}
+.icon-technology:before {
+  content: "\e915";
+}
+.icon-technology-1:before {
+  content: "\e916";
+}
+.icon-three:before {
+  content: "\e917";
+}
+.icon-time:before {
+  content: "\e918";
+}
+.icon-tool:before {
+  content: "\e919";
+}
+.icon-tool-1:before {
+  content: "\e91a";
+}
+.icon-up-arrow:before {
+  content: "\e91b";
+}
+.icon-xls-file:before {
+  content: "\e91c";
+}
+
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('../fonts/opensans-bold-webfont.woff2') format('woff2'),
+         url('../fonts/opensans-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('../fonts/opensans-light-webfont.woff2') format('woff2'),
+         url('../fonts/opensans-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/opensans-regular_0-webfont.woff2') format('woff2'),
+         url('../fonts/opensans-regular_0-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('../fonts/opensans-semibold_0-webfont.woff2') format('woff2'),
+         url('../fonts/opensans-semibold_0-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
