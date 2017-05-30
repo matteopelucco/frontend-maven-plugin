@@ -1,9 +1,192 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.pelucco</groupId>
-  <artifactId>frontend-maven-plugin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>Frontend Maven Plugin</name>
-  <description>	</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.pelucco</groupId>
+	<artifactId>frontend-maven-plugin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Frontend Maven Plugin (sample workout)</name>
+	<description>A simple war file to test maven-frontend-plugin</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javaVersion>1.8</javaVersion>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${javaVersion}</source>
+					<target>${javaVersion}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<!-- NB! Set <version> to the latest released version of frontend-maven-plugin, like in README.md -->
+				<version>1.0</version>
+
+				<executions>
+
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v6.9.5</nodeVersion>
+							<npmVersion>4.1.2</npmVersion>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<!-- Optional configuration which provides for running any npm command -->
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm rebuild node-sass</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>rebuild node-sass</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>bower install</id>
+						<goals>
+							<goal>bower</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+
+					<!-- no need JSPM -->
+					<execution>
+						<id>jspm install</id>
+						<phase>_DISABLED_</phase>
+						<goals>
+							<goal>jspm</goal>
+						</goals>
+						<configuration>
+							<arguments>--version</arguments>
+						</configuration>
+					</execution>
+
+					<!-- enable only if need a full cleaning <execution> <id>grunt clean 
+						exe</id> <phase>generate-resources</phase> <goals> <goal>grunt</goal> </goals> 
+						<configuration> <arguments>clean:all</arguments> </configuration> </execution> -->
+
+					<execution>
+						<id>grunt build</id>
+						<goals>
+							<goal>grunt</goal>
+						</goals>
+						<configuration>
+							<!-- <srcdir>${basedir}/html</srcdir> <outputdir>${basedir}/src/main/resources</outputdir> -->
+							<arguments>--no-color</arguments>
+						</configuration>
+					</execution>
+
+					<!-- no need GULP <execution> <id>gulp build</id> <phase>generate-resources</phase> 
+						<goals> <goal>gulp</goal> </goals> <configuration> <environmentVariables> 
+						<NODE_ENV>production</NODE_ENV> </environmentVariables> </configuration> 
+						</execution> -->
+
+					<!-- no need JS TEST <execution> <id>javascript tests</id> <goals> <goal>karma</goal> 
+						</goals> <configuration> <karmaConfPath>src/test/javascript/karma.conf.ci.js</karmaConfPath> 
+						</configuration> </execution> -->
+
+				</executions>
+			</plugin>
+
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- this just to prevent continue build cicle (need to run project - clean to have grunt running) -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.github.eirslett</groupId>
+										<artifactId>frontend-maven-plugin</artifactId>
+										<versionRange>[1.0,)</versionRange>
+										<goals>
+											<goal>npm</goal>
+											<goal>bower</goal>
+											<goal>grunt</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>false</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<!-- default resources configuration which will filter the module descriptor -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>META-INF/magnolia/*</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
 </project>

@@ -1,4 +1,7 @@
-/target/
+target/
 .classpath
 .settings/
 .project
+bower_components/
+node/
+node_modules/

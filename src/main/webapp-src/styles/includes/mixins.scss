@@ -1,0 +1,58 @@
+// Create grid for specific class
+@mixin make-grid($suffix, $space, $container: $space, $margin: 0) {
+  .container.container-#{$suffix} {
+    padding-left: $container;
+    padding-right: $container;
+  }
+  .container.container-#{$suffix} .row {
+    margin-left: -$space;
+    margin-right: -$space;
+  }
+  .container.container-#{$suffix} .row [class^="col-"], .container.container-#{$suffix} .row [class*=" col-"] {
+    padding-left: $space;
+    padding-right: $space;
+    margin-bottom: $margin;
+  }
+
+  .row.row-#{$suffix} {
+    margin-left: -$space;
+    margin-right: -$space;
+  }
+  .row.row-#{$suffix} [class^="col-"], .container .row.row-#{$suffix} [class*=" col-"] {
+    padding-left: $space;
+    padding-right: $space;
+    margin-bottom: $margin;
+  }
+}
+
+// Helper theme mixin
+// @param $name: name of the theme (HTML class)
+// @param $color: color of the theme
+@mixin theme($name, $color) {
+  .#{$name} {
+    .component{
+      border-color: darken($color, 10%);
+    }
+    
+    .component__heading {
+      color: $color;
+    }
+    
+    .component__list-item {
+      background: lighten($color, 45%);
+    }
+  }
+  
+  [data-theme='#{$name}'] {
+    background: $color;
+    
+    &:hover {
+      background: darken($color, 10%);
+    }
+    
+    &[disabled] {
+      background: desaturate($color, 40%);
+    }
+  }
+}
+
